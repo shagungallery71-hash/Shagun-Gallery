@@ -50,9 +50,10 @@ function ApplyModal({ job, onClose }) {
       // Upload resume first if provided
       if (resumeFile) {
         setUploadingResume(true)
+        const API_BASE = import.meta.env.VITE_API_URL || 'https://shagun-backend-kbbh.onrender.com';
         const fd = new FormData()
         fd.append('resume', resumeFile)
-        const upRes = await fetch(`/api/careers/upload-resume`, { method: 'POST', body: fd })
+        const upRes = await fetch(`${API_BASE}/api/careers/upload-resume`, { method: 'POST', body: fd })
         const upJson = await upRes.json()
         if (!upJson.success) throw new Error(upJson.message || 'Resume upload failed')
         resume_url = upJson.data.url

@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || '';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://shagun-backend-kbbh.onrender.com';
 const BASE_URL = `${API_BASE}/api/auth`;
 
 async function request(path, options = {}) {

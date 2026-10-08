@@ -39,6 +39,24 @@ app.use(helmet({
      contentSecurityPolicy: false, // Disable for API
 }));
 
+// CORS - Must be placed BEFORE rate-limiting and body parsing
+app.use(cors({
+     origin: true, // Allow any requesting origin dynamically (reflects origin)
+     credentials: true,
+     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+     allowedHeaders: [
+          'Content-Type',
+          'Authorization',
+          'X-Requested-With',
+          'Cache-Control',
+          'Pragma',
+          'Accept',
+          'Origin'
+     ],
+     exposedHeaders: ['Content-Range', 'X-Content-Range'],
+     maxAge: 86400 // Cache preflight for 24 hours
+}));
+
 // Compression for responses
 app.use(compression());
 
@@ -49,23 +67,11 @@ const limiter = rateLimit({
      message: { success: false, message: 'Too many requests, please try again later.' },
      standardHeaders: true,
      legacyHeaders: false,
-     skip: (req) => req.path.startsWith('/api/webhook'), // Skip for webhooks
+     skip: (req) => req.path.startsWith('/api/webhook') || req.method === 'OPTIONS', // Skip for webhooks and preflight
 });
 app.use('/api/', limiter);
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ extended: true, limit: '100mb' }));
-app.use(cors({
-     origin: true,          // 🔥 allow requesting origin automatically
-     credentials: true,
-     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-     allowedHeaders: [
-          'Content-Type',
-          'Authorization',
-          'X-Requested-With',
-          'Cache-Control',
-          'Pragma'
-     ],
-}));
 
 
 // =============================================================================

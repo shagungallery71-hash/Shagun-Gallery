@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowRight, Star, Globe, ShieldCheck, Instagram, Facebook } from 'lucide-react'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://shagun-backend-kbbh.onrender.com';
 
 export default function Newsletter() {
     const [email, setEmail] = useState('')

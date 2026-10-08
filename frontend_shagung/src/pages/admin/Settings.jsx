@@ -7,7 +7,7 @@ import { adminApi, getToken } from './index';
 import AdminLayout from './AdminLayout';
 import { Button, Card } from '../../components/ui';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API_BASE = import.meta.env.VITE_API_URL || 'https://shagun-backend-kbbh.onrender.com';
 
 export default function AdminSettings() {
     const navigate = useNavigate();

@@ -221,7 +221,7 @@ export default function CareersAdmin() {
     // Handle File Download
     const handleDownload = (url, filename) => {
         // Define API_BASE similar to client.js to ensure we hit the backend directly in dev
-        const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const API_BASE = import.meta.env.VITE_API_URL || 'https://shagun-backend-kbbh.onrender.com';
 
         // Use backend proxy to avoid CORS/Auth issues
         const proxyUrl = `${API_BASE}/api/careers/download-resume?url=${encodeURIComponent(url)}`;

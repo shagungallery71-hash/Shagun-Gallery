@@ -150,7 +150,7 @@ const SaleFormModal = ({ isOpen, onClose, sale, onSave }) => {
             const formDataUpload = new FormData()
             formDataUpload.append('image', file)
 
-            const response = await fetch('/api/upload', {
+            const response = await fetch('https://shagun-backend-kbbh.onrender.com/api/upload', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formDataUpload
