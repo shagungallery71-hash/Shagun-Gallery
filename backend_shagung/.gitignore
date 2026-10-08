@@ -1,0 +1,7 @@
+node_modules/
+.env
+.env.*
+uploads/
+*.log
+test_out.txt
+.DS_Store

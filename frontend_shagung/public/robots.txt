@@ -1,0 +1,29 @@
+# Robots.txt for Shagun Gallery
+# https://shagungallery.com
+
+User-agent: *
+Allow: /
+
+# Allow all crawlers to index the site
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Disallow admin pages from indexing
+Disallow: /admin/
+Disallow: /admin/*
+
+# Disallow sensitive pages
+Disallow: /checkout
+Disallow: /account
+Disallow: /reset-password
+Disallow: /verify-email
+
+# Allow product pages
+Allow: /products
+Allow: /products/*
+
+# Sitemap location
+Sitemap: https://shagungallery.com/sitemap.xml

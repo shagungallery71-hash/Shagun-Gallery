@@ -1,0 +1,12 @@
+[
+  {"id":"leh-001","name":"Embroidered Bridal Lehenga","category":"Lehengas","price":249.99,"originalPrice":319.99,"rating":4.8,"ratingCount":128,"image":"https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1200&auto=format&fit=crop","badge":"Sale"},
+  {"id":"leh-002","name":"Velvet Zari Work Lehenga","category":"Lehengas","price":199.99,"originalPrice":259.99,"rating":4.6,"ratingCount":86,"image":"https://images.unsplash.com/photo-1577097697768-3ba3e6a4f3a3?q=80&w=1200&auto=format&fit=crop","badge":"Hot"},
+  {"id":"sar-001","name":"Silk Kanjivaram Saree","category":"Sarees","price":149.99,"originalPrice":189.99,"rating":4.7,"ratingCount":210,"image":"https://images.unsplash.com/photo-1571907480495-6d37584f3f53?q=80&w=1200&auto=format&fit=crop","badge":"New"},
+  {"id":"sar-002","name":"Georgette Party Wear Saree","category":"Sarees","price":89.99,"originalPrice":119.99,"rating":4.3,"ratingCount":74,"image":"https://images.unsplash.com/photo-1571907480689-c1aef9bbf7a1?q=80&w=1200&auto=format&fit=crop"},
+  {"id":"kur-001","name":"Printed Anarkali Kurti","category":"Kurtis","price":39.99,"originalPrice":59.99,"rating":4.4,"ratingCount":156,"image":"https://images.unsplash.com/photo-1621784562761-f7f816f0d7f4?q=80&w=1200&auto=format&fit=crop"},
+  {"id":"kur-002","name":"Cotton Straight Kurti","category":"Kurtis","price":29.99,"originalPrice":44.99,"rating":4.2,"ratingCount":93,"image":"https://images.unsplash.com/photo-1612336307429-8f52a2d62494?q=80&w=1200&auto=format&fit=crop"},
+  {"id":"dre-001","name":"Floral A-Line Dress","category":"Dresses","price":59.99,"originalPrice":79.99,"rating":4.5,"ratingCount":141,"image":"https://images.unsplash.com/photo-1520975922320-215f71c8d9b0?q=80&w=1200&auto=format&fit=crop","badge":"Best Seller"},
+  {"id":"dre-002","name":"Evening Gown","category":"Dresses","price":129.99,"originalPrice":169.99,"rating":4.6,"ratingCount":98,"image":"https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop"},
+  {"id":"jew-001","name":"Kundan Necklace Set","category":"Jewelry","price":89.99,"originalPrice":119.99,"rating":4.7,"ratingCount":222,"image":"https://images.unsplash.com/photo-1603569283847-1f285c868f2c?q=80&w=1200&auto=format&fit=crop"},
+  {"id":"jew-002","name":"Traditional Jhumka Earrings","category":"Jewelry","price":24.99,"originalPrice":34.99,"rating":4.4,"ratingCount":305,"image":"https://images.unsplash.com/photo-1617038260897-25b98cdc4daa?q=80&w=1200&auto=format&fit=crop"}
+]

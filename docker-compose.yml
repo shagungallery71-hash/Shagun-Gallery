@@ -1,0 +1,76 @@
+#Also add nginx config file + in ec2
+version: "3.8"
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    depends_on:
+      - frontend
+    restart: always
+    networks:
+      - app-network
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/conf:/etc/letsencrypt
+    entrypoint: >
+      /bin/sh -c "trap exit TERM; while :; do
+        certbot renew --webroot -w /var/www/certbot --quiet;
+        sleep 12h;
+      done"
+    restart: always
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend_shagung
+      args:
+        NODE_MEM: 2048
+    container_name: shagung_frontend
+    expose:
+      - "80"
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend_shagung
+    container_name: shagung_backend
+    expose:
+      - "5000"
+    env_file:
+      - ./backend_shagung/.env
+    environment:
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+    depends_on:
+      - rabbitmq
+    restart: always
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    expose:
+      - "5672"
+      - "15672"
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

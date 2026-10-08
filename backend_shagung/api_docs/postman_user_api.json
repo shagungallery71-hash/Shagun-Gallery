@@ -1,0 +1,1767 @@
+{
+    "info": {
+        "name": "Shagung E-commerce - User API",
+        "description": "User-facing API endpoints for Shagung E-commerce Platform.\n\nBase URL: {{baseUrl}}\n\n## Authentication\nMost endpoints require Bearer token in Authorization header.\nGet token from login response.\n\n## Variables\n- baseUrl: http://localhost:5000\n- token: User JWT token",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:5000",
+            "type": "string"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "Auth",
+            "description": "User authentication endpoints",
+            "item": [
+                {
+                    "name": "Register",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"username\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/register",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "register"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var jsonData = pm.response.json();",
+                                    "if (jsonData.token) {",
+                                    "    pm.collectionVariables.set('token', jsonData.token);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/login",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "login"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Verify Email",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/verify?token={{verificationToken}}&user_id={{userId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "verify"
+                            ],
+                            "query": [
+                                {
+                                    "key": "token",
+                                    "value": "{{verificationToken}}"
+                                },
+                                {
+                                    "key": "user_id",
+                                    "value": "{{userId}}"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Forget Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/forget-password",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "forget-password"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Verify OTP",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"123456\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/verify-otp",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "verify-otp"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Reset Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\",\n  \"otp\": \"123456\",\n  \"newPassword\": \"newpassword123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/auth/reset-password",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "auth",
+                                "reset-password"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Products",
+            "description": "Product browsing endpoints",
+            "item": [
+                {
+                    "name": "Get All Products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products?page=1&limit=20",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "20"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Product Detail",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Featured Products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/featured?limit=8",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "featured"
+                            ],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "8"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Products by Category",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/category/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "category",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Related Products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1/related",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1",
+                                "related"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Product Reviews",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1/reviews?page=1&limit=5",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1",
+                                "reviews"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "5"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Product Review",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"rating\": 5,\n  \"comment\": \"Great product! Highly recommended.\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/products/1/review",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                "1",
+                                "review"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Categories",
+            "description": "Category browsing endpoints",
+            "item": [
+                {
+                    "name": "Get All Categories",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/categories",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "categories"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Main Categories",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/categories/main",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "categories",
+                                "main"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Subcategories",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/categories/sub/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "categories",
+                                "sub",
+                                "1"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Search",
+            "description": "Product search endpoints",
+            "item": [
+                {
+                    "name": "Search Products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/search?q=saree&limit=20&page=1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "search"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "saree"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "20"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Search Suggestions",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/search/suggestions?q=sar",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "search",
+                                "suggestions"
+                            ],
+                            "query": [
+                                {
+                                    "key": "q",
+                                    "value": "sar"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Trending Searches",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/search/trending",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "search",
+                                "trending"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Cart",
+            "description": "Shopping cart management (requires auth)",
+            "item": [
+                {
+                    "name": "Get Cart",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add to Cart",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"productId\": 1,\n  \"variantId\": 1,\n  \"quantity\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Cart Count",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart/count",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart",
+                                "count"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Cart Item",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"quantity\": 2\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Remove from Cart",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Clear Cart",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Available Coupons",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart/coupons",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart",
+                                "coupons"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Apply Coupon",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"code\": \"WELCOME20\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/cart/coupon",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "cart",
+                                "coupon"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Wishlist",
+            "description": "Wishlist management (requires auth)",
+            "item": [
+                {
+                    "name": "Get Wishlist",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add to Wishlist",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"productId\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Toggle Wishlist",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"productId\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist/toggle",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist",
+                                "toggle"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Check Wishlist",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist/check/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist",
+                                "check",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Move to Cart",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"productId\": 1,\n  \"variantId\": 1\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist/move-to-cart",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist",
+                                "move-to-cart"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Remove from Wishlist",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Clear Wishlist",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/wishlist",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "wishlist"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Addresses",
+            "description": "Address management (requires auth)",
+            "item": [
+                {
+                    "name": "Get Addresses",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/addresses",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "addresses"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Add Address",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"phone\": \"9876543210\",\n  \"address_line1\": \"123 Main Street\",\n  \"address_line2\": \"Apt 4B\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\",\n  \"postal_code\": \"400001\",\n  \"country\": \"India\",\n  \"is_default\": true,\n  \"address_type\": \"home\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/addresses",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "addresses"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Address",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"name\": \"John Doe\",\n  \"phone\": \"9876543210\",\n  \"address_line1\": \"456 New Street\",\n  \"city\": \"Mumbai\",\n  \"state\": \"Maharashtra\",\n  \"postal_code\": \"400002\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/addresses/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "addresses",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Address",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/addresses/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "addresses",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Set Default Address",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/addresses/1/default",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "addresses",
+                                "1",
+                                "default"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "description": "Order management (requires auth)",
+            "item": [
+                {
+                    "name": "Create Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"addressId\": 1,\n  \"paymentMethod\": \"online\",\n  \"couponCode\": \"WELCOME20\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/orders",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get My Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/orders?page=1&limit=10",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "10"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Order Detail",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/orders/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Cancel Order",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"reason\": \"Changed my mind\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/orders/1/cancel",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders",
+                                "1",
+                                "cancel"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Track Order (Public)",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/orders/track/ORD-123456?email=john@example.com",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "orders",
+                                "track",
+                                "ORD-123456"
+                            ],
+                            "query": [
+                                {
+                                    "key": "email",
+                                    "value": "john@example.com"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Payments",
+            "description": "Payment processing (requires auth)",
+            "item": [
+                {
+                    "name": "Get Payment Status (Service)",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/payments/status",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "payments",
+                                "status"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Payment Offers",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/payments/offers",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "payments",
+                                "offers"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Payment Intent",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"amount\": 1999,\n  \"currency\": \"INR\",\n  \"metadata\": {\n    \"orderId\": 1\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/payments/create-intent",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "payments",
+                                "create-intent"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Verify Payment",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"orderId\": \"order_abc123\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/payments/verify",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "payments",
+                                "verify"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Payment Methods",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/payments/methods",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "payments",
+                                "methods"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Sales",
+            "description": "Sale/promotion endpoints (public)",
+            "item": [
+                {
+                    "name": "Get Active Sales",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/sales/active",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "sales",
+                                "active"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Sale Products",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/sales/products?page=1&limit=20",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "sales",
+                                "products"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "20"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Sale Detail",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/sales/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "sales",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Check Product Sale Status",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/sales/product/1/status",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "sales",
+                                "product",
+                                "1",
+                                "status"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Hero Section",
+            "description": "Homepage banner endpoints (public)",
+            "item": [
+                {
+                    "name": "Get Hero Slides",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/hero/slides",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "hero",
+                                "slides"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Hero Settings",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/hero/settings",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "hero",
+                                "settings"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Blogs",
+            "description": "Blog content endpoints (public)",
+            "item": [
+                {
+                    "name": "Get All Blogs",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/blogs?page=1&limit=12",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "blogs"
+                            ],
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "12"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Blog Categories",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/blogs/categories",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "blogs",
+                                "categories"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Featured Blogs",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/blogs/featured?limit=5",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "blogs",
+                                "featured"
+                            ],
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "5"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Blogs by Category",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/blogs/category/fashion-style",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "blogs",
+                                "category",
+                                "fashion-style"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Blog Detail",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/blogs/my-blog-post",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "blogs",
+                                "my-blog-post"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Careers",
+            "description": "Job listings endpoints (public)",
+            "item": [
+                {
+                    "name": "Get Active Jobs",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/careers/jobs",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "careers",
+                                "jobs"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Departments",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/careers/departments",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "careers",
+                                "departments"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Job Detail",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/careers/jobs/1",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "careers",
+                                "jobs",
+                                "1"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Submit Application",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"job_id\": 1,\n  \"full_name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"phone\": \"9876543210\",\n  \"resume_url\": \"https://example.com/resume.pdf\",\n  \"cover_letter\": \"I am excited to apply for this position...\",\n  \"years_of_experience\": 3\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/careers/apply",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "careers",
+                                "apply"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Newsletter",
+            "description": "Newsletter subscription",
+            "item": [
+                {
+                    "name": "Subscribe",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"email\": \"john@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/newsletter",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "newsletter"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Unsubscribe",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/newsletter?email=john@example.com",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "newsletter"
+                            ],
+                            "query": [
+                                {
+                                    "key": "email",
+                                    "value": "john@example.com"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Delivery",
+            "description": "Delivery/pincode check",
+            "item": [
+                {
+                    "name": "Check Pincode",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/delivery/check/400001",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "delivery",
+                                "check",
+                                "400001"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Pincodes",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/api/delivery/pincodes",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "delivery",
+                                "pincodes"
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Health",
+            "description": "Server health endpoints",
+            "item": [
+                {
+                    "name": "Health Check",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/health",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "health"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Server Info",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "{{baseUrl}}/",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                ""
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "motion": {
+      "source": "secondsky/claude-skills",
+      "sourceType": "github",
+      "computedHash": "b0ca0f76affa8b0f2b13ff3bd846bff8162941d6a8fb699f3d57a4bfb3059668"
+    },
+    "shadcn-ui": {
+      "source": "google-labs-code/stitch-skills",
+      "sourceType": "github",
+      "computedHash": "119a14a004bd30fa99d386df599bd0db8d057cca146f7ee08349daed48b2ea55"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ff602214356ac15c65aa8702aff5a2aedaf958d66d301e3279f1dfeaf18c94e9"
+    }
+  }
+}

@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables & secrets
+.env
+.env.*
+*.env
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
+# Secret AWS Keys & Certificates
+AwsKey/
+**/AwsKey/
+certbot/
+**/certbot/
+*.pem
+*.key
+*.crt
+
+# Git backup
+.git_backup/
+**/.git_backup/
+
+# Build artifacts
+dist/
+**/dist/
+dist-ssr/
+build/
+build_log.txt
+**/build_log.txt
+
+# Logs and debug files
+*.log
+npm-debug.log*
+yarn-debug.log*
+test_out.txt
+**/test_out.txt
+
+# Local uploads
+uploads/
+**/uploads/
+
+# IDE & Editor folders
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.agent/
+.agents/
+.claude/
+.continue/

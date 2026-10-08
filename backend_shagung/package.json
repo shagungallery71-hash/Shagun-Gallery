@@ -1,0 +1,51 @@
+{
+  "name": "backend_shagung",
+  "version": "2.0.0",
+  "description": "Shagung E-commerce Backend API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "worker": "node workers/emailworker.js",
+    "worker:cache": "node workers/cacheWorker.js",
+    "migrate": "psql $DATABASE_URL -f ./databaseMigration/schema.sql",
+    "seed": "node seedDummyData.js"
+  },
+  "keywords": [
+    "ecommerce",
+    "api",
+    "nodejs",
+    "express",
+    "stripe",
+    "postgresql"
+  ],
+  "author": "Shagung Team",
+  "license": "ISC",
+  "dependencies": {
+    "@upstash/redis": "^1.35.6",
+    "amqplib": "^0.10.9",
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.8.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.3.0",
+    "helmet": "^7.1.0",
+    "ioredis": "^5.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.10",
+    "pg": "^8.16.3",
+    "stripe": "^14.10.0",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
