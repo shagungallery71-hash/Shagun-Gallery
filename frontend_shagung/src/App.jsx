@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Account from './pages/Account'
+import Login from './pages/Login'
 import Brand from './pages/Brand'
 import Community from './pages/Community'
 import Help from './pages/Help'
@@ -101,8 +102,11 @@ function App() {
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/sale" element={<SalePage />} />
 
-              {/* User Account Routes */}
+              {/* User Account & Authentication Routes */}
               <Route path="/account" element={<Account />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signin" element={<Login />} />
+              <Route path="/signup" element={<Login defaultMode="signup" />} />
               <Route path="/orders" element={<Orders />} />
               <Route path="/order/:orderId" element={<OrderDetail />} />
 
